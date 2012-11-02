@@ -4,6 +4,7 @@ use Test::More;
 use Digest::MD5 qw(md5 md5_hex md5_base64);
 use lib 't/lib';
 use utf8::all;
+use File::Slurp;
 
 my $test_data = [
 	{ uri => URI->new( q,http://www.sciencedirect.com/science/article/pii/S0925838803002378,), type => 'ScienceDirect', md5_hex => '4a4558d190ce1f3cb7b7498837375a84' },
@@ -59,7 +60,6 @@ for my $test (@$test_data) {
 		is md5_hex($pdf_response->decoded_content), $test_md5, 'PDF MD5 checksum';
 
 		#use DDP; p $pdf_response->filename;
-		use File::Slurp;
 		write_file($pdf_response->filename, $pdf_response->decoded_content);
 
 		my $fid = fork();

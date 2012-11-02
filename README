@@ -38,5 +38,6 @@ Requires from CPAN:
 * URI (liburi-perl)
 * utf8::all (libutf8-all-perl);
 * MooX::Types::MooseLike
+* File::Slurp (libfile-slurp-perl)
 
 Also, one of the tests requires the `see` command (mime-support).
