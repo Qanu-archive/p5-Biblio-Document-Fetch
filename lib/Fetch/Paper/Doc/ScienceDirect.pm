@@ -8,9 +8,6 @@ use HTML::TreeBuilder::XPath;
 use List::Util qw/first/;
 use Try::Tiny;
 
-use Memoize;
-memoize('_content_has_pdf');
-
 extends 'Fetch::Paper::Doc';
 with ('Fetch::Paper::Doc::Role::FullTextHTMLContentPDF',
 	'Fetch::Paper::Doc::Role::ProxyDomain');
