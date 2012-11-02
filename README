@@ -1,0 +1,42 @@
+This code is used to fetch papers from online in a DWIMy way.
+
+Currently only works in a hack-ish state.
+
+The proxy code assumes you are using UH's proxy, but should be easy to adapt.
+It uses the environment variables:
+
+UH_COUGARNET_USER="user"
+UH_COUGARNET_PASS="pass"
+
+Currently supports:
+
+* searching: Google Scholar
+* downloading metadata and PDFs from: ScienceDirect, SpringerLink, IEEE
+
+TODO:
+
+* write documentation
+* support more sources
+* automatically dispatch to source plugins
+* fetch/generate clean BibTeX 
+
+WARNING: This code is only meant to be used for personal use. Do not use this
+for systematic downloading of papers as this will likely violate agreements
+between your institution and publishers.
+
+Requires from CPAN:
+
+* LWP (libwww-perl)
+* LWP::Protocol::https (liblwp-protocol-https-perl)
+* Moo (libmoo-perl)
+* HTML::TreeBuilder::XPath (libhtml-treebuilder-xpath-perl)
+* HTML::Form (libhtml-form-perl)
+* Regexp::Common (libregexp-common-perl)
+* Test::Deep (libtest-deep-perl)
+* Text::BibTeX (libtext-bibtex-perl)
+* Try::Tiny (libtry-tiny-perl)
+* URI (liburi-perl)
+* utf8::all (libutf8-all-perl);
+* MooX::Types::MooseLike
+
+Also, one of the tests requires the `see` command (mime-support).
