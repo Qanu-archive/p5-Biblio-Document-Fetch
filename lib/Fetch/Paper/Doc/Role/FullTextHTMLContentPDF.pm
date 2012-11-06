@@ -10,7 +10,9 @@ with ('Fetch::Paper::Doc::Role::FullTextHTMLContent',
 
 has _content_for_pdf => ( is => 'lazy' );
 
-sub _content_has_pdf { my ($self, $content) = @_; undef; }
+requires qw( _content_has_pdf );
+
+# sub _content_has_pdf { my ($self, $content) = @_; undef; }
 
 sub get_pdf_link { undef; }
 
