@@ -73,13 +73,13 @@ sub get_pdf_link {
 	my ($self) = @_;
 
 	my $tree = HTML::TreeBuilder::XPath->new;
-
-	$tree->parse( $self->_content_for_pdf );
-	my $pdf_link = $self->_tree_pdf_node($tree);
-	my $link = URI->new_abs($pdf_link->attr('href'), $self->base_uri);
-
+	my $link;
 	my $pdf_page;
+
 	try {
+		$tree->parse( $self->_content_for_pdf );
+		my $pdf_link = $self->_tree_pdf_node($tree);
+		$link = URI->new_abs($pdf_link->attr('href'), $self->base_uri);
 		$pdf_page = $self->_agent_for_pdf->get($link);
 	} catch {
 		croak "Could not get PDF: $@";
