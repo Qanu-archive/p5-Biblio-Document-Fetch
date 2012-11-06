@@ -2,6 +2,9 @@ package Fetch::Paper;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 use LWP::UserAgent;
