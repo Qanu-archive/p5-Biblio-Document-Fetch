@@ -65,7 +65,7 @@ sub login {
 		$response = $agent->post(EZPROXY_LOGIN,
 			{user => $ENV{UH_COUGARNET_USER},
 			pass => $ENV{UH_COUGARNET_PASS}},);
-		croak "Invalid user/password: $_\n" unless $response->code == 302;
+		croak "Invalid user/password\n" unless $response->code == 302;
 	} catch {
 		croak "Can not login: $_\n";
 	};
