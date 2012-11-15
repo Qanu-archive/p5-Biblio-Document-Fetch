@@ -23,7 +23,8 @@ WriteMakefile
          'File::Slurp'              => '0.0',
   },
   BUILD_REQUIRES => {
-    'Test::More' => '0.0',
-    'Test::Deep' => '0.0',
+    'Test::More'    => '0.0',
+    'Test::Deep'    => '0.0',
+    'Data::Printer' => '0.0',
   },
 );
