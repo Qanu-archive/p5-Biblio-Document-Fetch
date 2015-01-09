@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::Role::BibTeX;
+package Biblio::Document::Fetch::Doc::Role::BibTeX;
 
 use strict;
 use warnings;

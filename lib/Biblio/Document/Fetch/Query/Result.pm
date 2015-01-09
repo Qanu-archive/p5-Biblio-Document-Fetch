@@ -1,4 +1,4 @@
-package Fetch::Paper::Query::Result;
+package Biblio::Document::Fetch::Query::Result;
 
 use strict;
 use warnings;

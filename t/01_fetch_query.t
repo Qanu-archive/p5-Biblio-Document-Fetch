@@ -6,14 +6,14 @@ use lib 't/lib';
 
 use Storable qw/dclone/;
 
-BEGIN { use_ok( 'Fetch::Paper' ); }
-require_ok( 'Fetch::Paper' );
+BEGIN { use_ok( 'Biblio::Document::Fetch' ); }
+require_ok( 'Biblio::Document::Fetch' );
 
-BEGIN { use_ok( 'Fetch::Paper::Query::Google::Scholar' ); }
-require_ok( 'Fetch::Paper::Query::Google::Scholar' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Query::Google::Scholar' ); }
+require_ok( 'Biblio::Document::Fetch::Query::Google::Scholar' );
 
 my $fetch;
-ok defined( $fetch = Fetch::Paper->new()), "create fetcher";
+ok defined( $fetch = Biblio::Document::Fetch->new()), "create fetcher";
 isa_ok($fetch->agent, LWP::UserAgent, "agent");
 
 my $first_page;

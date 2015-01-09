@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::ACM;
+package Biblio::Document::Fetch::Doc::PubMed;
 # TODO
 
 use strict;
@@ -6,7 +6,7 @@ use warnings;
 use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 
-extends 'Fetch::Paper::Doc';
+extends 'Biblio::Document::Fetch::Doc';
 
 has _content => ( is => 'rw' );
 

@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::Role::PDF;
+package Biblio::Document::Fetch::Doc::Role::PDF;
 
 use strict;
 use warnings;

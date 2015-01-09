@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::Role::Proxy;
+package Biblio::Document::Fetch::Doc::Role::Proxy;
 
 use strict;
 use warnings;

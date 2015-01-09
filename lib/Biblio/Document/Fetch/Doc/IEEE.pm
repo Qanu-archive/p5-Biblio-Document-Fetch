@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::IEEE;
+package Biblio::Document::Fetch::Doc::IEEE;
 
 use strict;
 use warnings;
@@ -9,9 +9,9 @@ use Regexp::Common qw /whitespace/;
 use Carp;
 use Try::Tiny;
 
-extends 'Fetch::Paper::Doc';
-with ('Fetch::Paper::Doc::Role::FullTextHTMLContentPDF',
-	'Fetch::Paper::Doc::Role::ProxyDomain');
+extends 'Biblio::Document::Fetch::Doc';
+with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
+	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 has base_uri => ( is => 'ro', default => sub { URI->new('http://ieeexplore.ieee.org/') } );
 has proxy_domain => ( is => 'ro', default => sub { 'ieeexplore.ieee.org' } );

@@ -1,4 +1,4 @@
-package Fetch::Paper::Query::Google::Scholar::ResultsPage;
+package Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage;
 
 use strict;
 use warnings;
@@ -6,13 +6,13 @@ use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 use URI;
 use HTML::TreeBuilder::XPath;
-use Fetch::Paper::Query::Google::Scholar::Result;
+use Biblio::Document::Fetch::Query::Google::Scholar::Result;
 use Try::Tiny;
 use Carp;
 
 use HTTP::Response;
 
-extends 'Fetch::Paper::Query::ResultsPage';
+extends 'Biblio::Document::Fetch::Query::ResultsPage';
 
 has response => ( is => 'rw', isa => InstanceOf['HTTP::Response'] );
 has tree => ( is => 'lazy' );
@@ -23,7 +23,7 @@ sub _build_entries {
 	my $tree = HTML::TreeBuilder::XPath->new;
 	$tree->parse( $self->response->decoded_content );
 	my @nodes = $tree->findnodes('//div[@class="gs_r"]');
-	return [ map { Fetch::Paper::Query::Google::Scholar::Result->new( entry_data => $_ ) }
+	return [ map { Biblio::Document::Fetch::Query::Google::Scholar::Result->new( entry_data => $_ ) }
 	 ( @nodes ) ];
 }
 
@@ -36,7 +36,7 @@ sub _build_next_page {
 	my $next_uri = URI->new_abs( $next_link[0]->attr('href'), $self->response->base );
 	my $res = try { $self->query->get($next_uri); } catch { carp "Not able to retrieve next page: $_"; }
 	my $results;
-	$results = Fetch::Paper::Query::Google::Scholar::ResultsPage->new( query => $self->query,
+	$results = Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage->new( query => $self->query,
 		response => $res ) if defined $res;
 	return $results;
 }
@@ -51,7 +51,7 @@ sub _build_previous_page {
 	my $prev_uri = URI->new_abs( $prev_link[0]->attr('href'), $self->response->base );
 	my $res = try { $self->query->get($prev_uri); } catch { carp "Not able to retrieve previous page: $_"; }
 	my $results;
-	$results = Fetch::Paper::Query::Google::Scholar::ResultsPage->new( query => $self->query,
+	$results = Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage->new( query => $self->query,
 		response => $res) if defined $res;
 	return $results;
 }

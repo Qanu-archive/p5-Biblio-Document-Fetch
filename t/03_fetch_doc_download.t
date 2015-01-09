@@ -14,26 +14,26 @@ my $test_data = [
 
 plan tests => 6 + @$test_data;
 
-BEGIN { use Fetch::Paper; }
-require_ok( 'Fetch::Paper' );
+BEGIN { use Biblio::Document::Fetch; }
+require_ok( 'Biblio::Document::Fetch' );
 
-BEGIN { use Fetch::Paper::Doc; }
-require_ok( 'Fetch::Paper::Doc' );
+BEGIN { use Biblio::Document::Fetch::Doc; }
+require_ok( 'Biblio::Document::Fetch::Doc' );
 
-BEGIN { use Fetch::Paper::Proxy; }
-require_ok( 'Fetch::Paper::Proxy' );
+BEGIN { use Biblio::Document::Fetch::Proxy; }
+require_ok( 'Biblio::Document::Fetch::Proxy' );
 
 
 my $fetch;
-ok defined( $fetch = Fetch::Paper->new()), "create fetcher";
+ok defined( $fetch = Biblio::Document::Fetch->new()), "create fetcher";
 isa_ok($fetch->agent, LWP::UserAgent, "agent");
 
 my $proxy;
-ok defined( $proxy = Fetch::Paper::Proxy->new( fetch => $fetch )), "create proxy";
+ok defined( $proxy = Biblio::Document::Fetch::Proxy->new( fetch => $fetch )), "create proxy";
 
 
 # TODO remove this test...automatic login
-#my $proxy_login = Fetch::Paper::Proxy->new( fetch => $fetch );
+#my $proxy_login = Biblio::Document::Fetch::Proxy->new( fetch => $fetch );
 #my $login_response;
 #my $test_agent = $fetch->agent->clone;
 #$proxy_login->agent($test_agent);
@@ -47,8 +47,8 @@ for my $test (@$test_data) {
 		plan tests => 5;
 		my $doc;
 		ok defined($doc = $fetch->doc($test_type,
-				URI->new($test_uri), proxy => Fetch::Paper::Proxy->new(fetch => $fetch))), "Create $test_type doc";
-		isa_ok( $doc, "Fetch::Paper::Doc::$test_type", "$test_type type");
+				URI->new($test_uri), proxy => Biblio::Document::Fetch::Proxy->new(fetch => $fetch))), "Create $test_type doc";
+		isa_ok( $doc, "Biblio::Document::Fetch::Doc::$test_type", "$test_type type");
 
 		#use DDP; p $doc->agent;
 		#use DDP; p $doc->ft_agent;

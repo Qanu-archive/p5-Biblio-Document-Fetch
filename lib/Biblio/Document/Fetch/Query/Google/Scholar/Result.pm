@@ -1,4 +1,4 @@
-package Fetch::Paper::Query::Google::Scholar::Result;
+package Biblio::Document::Fetch::Query::Google::Scholar::Result;
 
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ use MooX::Types::MooseLike::Base qw(:all);
 use URI;
 use URI::QueryParam;
 
-extends 'Fetch::Paper::Query::Result';
+extends 'Biblio::Document::Fetch::Query::Result';
 
 has entry_data => ( is => 'rw', isa => InstanceOf['HTML::Element'] );
 

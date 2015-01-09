@@ -1,4 +1,4 @@
-package Fetch::Paper;
+package Biblio::Document::Fetch;
 
 use strict;
 use warnings;

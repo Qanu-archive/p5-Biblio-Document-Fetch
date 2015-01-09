@@ -1,13 +1,13 @@
-package Fetch::Paper::Query::Google::Scholar;
+package Biblio::Document::Fetch::Query::Google::Scholar;
 
 use strict;
 use warnings;
 use Moo;
-extends 'Fetch::Paper::Query';
+extends 'Biblio::Document::Fetch::Query';
 
 use URI;
 use URI::QueryParam;
-use Fetch::Paper::Query::Google::Scholar::ResultsPage;
+use Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage;
 use Carp;
 use Try::Tiny;
 use Digest::MD5;
@@ -30,7 +30,7 @@ sub query {
 	$uri->query_param(NUMBER_PARAM);
 	my $response = $self->get($uri);
 	my $results;
-	$results = Fetch::Paper::Query::Google::Scholar::ResultsPage->new(query => $self,
+	$results = Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage->new(query => $self,
 		response => $response) if defined $response;
 	return $results;
 }

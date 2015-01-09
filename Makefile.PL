@@ -6,8 +6,8 @@ use 5.008;
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-  NAME         => 'Fetch-Paper',
-  VERSION_FROM => 'lib/Fetch/Paper.pm',
+  NAME         => 'Biblio-Document-Fetch',
+  VERSION_FROM => 'lib/Biblio/Document/Fetch.pm',
   PREREQ_PM    => {
          'LWP'                      => '0.0',
          'LWP::Protocol::https'     => '0.0',

@@ -1,4 +1,4 @@
-package Fetch::Paper::Proxy;
+package Biblio::Document::Fetch::Proxy;
 
 use strict;
 use warnings;

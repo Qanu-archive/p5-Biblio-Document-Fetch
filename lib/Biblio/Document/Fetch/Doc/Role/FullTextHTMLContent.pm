@@ -1,10 +1,10 @@
-package Fetch::Paper::Doc::Role::FullTextHTMLContent;
+package Biblio::Document::Fetch::Doc::Role::FullTextHTMLContent;
 
 use strict;
 use warnings;
 use Moo::Role;
 
-with ('Fetch::Paper::Doc::Role::FullText');
+with ('Biblio::Document::Fetch::Doc::Role::FullText');
 
 has _ft_content => ( is => 'rw', builder => "_build__ft_content", lazy => 1 );
 

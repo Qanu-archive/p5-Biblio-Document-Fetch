@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::ScienceDirect;
+package Biblio::Document::Fetch::Doc::ScienceDirect;
 
 use strict;
 use warnings;
@@ -8,9 +8,9 @@ use HTML::TreeBuilder::XPath;
 use List::Util qw/first/;
 use Try::Tiny;
 
-extends 'Fetch::Paper::Doc';
-with ('Fetch::Paper::Doc::Role::FullTextHTMLContentPDF',
-	'Fetch::Paper::Doc::Role::ProxyDomain');
+extends 'Biblio::Document::Fetch::Doc';
+with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
+	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
 

@@ -1,9 +1,9 @@
-package Fetch::Paper::Doc::Role::ProxyDomain;
+package Biblio::Document::Fetch::Doc::Role::ProxyDomain;
 
 use strict;
 use warnings;
 use Moo::Role;
-with ('Fetch::Paper::Doc::Role::FullText', 'Fetch::Paper::Doc::Role::Proxy');
+with ('Biblio::Document::Fetch::Doc::Role::FullText', 'Biblio::Document::Fetch::Doc::Role::Proxy');
 
 has proxy_domain => ( is => 'ro' );
 

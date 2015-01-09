@@ -3,17 +3,17 @@
 use Test::More;
 use lib 't/lib';
 
-BEGIN { use_ok( 'Fetch::Paper' ); }
-require_ok( 'Fetch::Paper' );
+BEGIN { use_ok( 'Biblio::Document::Fetch' ); }
+require_ok( 'Biblio::Document::Fetch' );
 
-BEGIN { use_ok( 'Fetch::Paper::Doc' ); }
-require_ok( 'Fetch::Paper::Doc' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Doc' ); }
+require_ok( 'Biblio::Document::Fetch::Doc' );
 
-BEGIN { use_ok( 'Fetch::Paper::Doc::ScienceDirect' ); }
-require_ok( 'Fetch::Paper::Doc::ScienceDirect' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Doc::ScienceDirect' ); }
+require_ok( 'Biblio::Document::Fetch::Doc::ScienceDirect' );
 
 my $fetch;
-ok defined( $fetch = Fetch::Paper->new()), "create fetcher";
+ok defined( $fetch = Biblio::Document::Fetch->new()), "create fetcher";
 isa_ok($fetch->agent, LWP::UserAgent, "agent");
 
 my $doc;
@@ -24,7 +24,7 @@ if(grep { /ScienceDirect/ } @do) {
 	ok defined($doc = $fetch->doc('ScienceDirect',
 		URI->new('http://www.sciencedirect.com/science/article/pii/S0925838803002378'))),
 		'Create ScienceDirect doc';
-	isa_ok( $doc, 'Fetch::Paper::Doc::ScienceDirect', 'ScienceDirect type');
+	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::ScienceDirect', 'ScienceDirect type');
 	use DDP; p $doc->info;
 }
 
@@ -32,7 +32,7 @@ if(grep { /IEEE/ } @do) {
 	ok defined($doc = $fetch->doc('IEEE',
 		URI->new('http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=860044'))),
 		'Create IEEE doc';
-	isa_ok( $doc, 'Fetch::Paper::Doc::IEEE', 'IEEE type');
+	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::IEEE', 'IEEE type');
 	use DDP; p $doc->info;
 	#URI->new('http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=860044');
 }
@@ -42,7 +42,7 @@ if(grep { /SpringerLink/ } @do) {
 	ok defined($doc = $fetch->doc('SpringerLink',
 		URI->new('http://www.springerlink.com/content/p4p7668165p03723/'))),
 		'Create SpringerLink doc';
-	isa_ok( $doc, 'Fetch::Paper::Doc::SpringerLink', 'SpringerLink type');
+	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::SpringerLink', 'SpringerLink type');
 	use DDP; p $doc->info;
 }
 

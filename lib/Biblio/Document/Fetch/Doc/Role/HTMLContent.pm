@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::Role::HTMLContent;
+package Biblio::Document::Fetch::Doc::Role::HTMLContent;
 
 use strict;
 use warnings;

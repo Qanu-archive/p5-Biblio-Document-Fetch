@@ -1,4 +1,4 @@
-package Fetch::Paper::Doc::Role::FullText;
+package Biblio::Document::Fetch::Doc::Role::FullText;
 
 use strict;
 use warnings;

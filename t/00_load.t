@@ -4,18 +4,18 @@ use Test::More;
 use LWP::UserAgent;
 use lib 't/lib';
 
-BEGIN { use_ok( 'Fetch::Paper' ); }
-require_ok( 'Fetch::Paper' );
+BEGIN { use_ok( 'Biblio::Document::Fetch' ); }
+require_ok( 'Biblio::Document::Fetch' );
 
-BEGIN { use_ok( 'Fetch::Paper::Query' ); }
-require_ok( 'Fetch::Paper::Query' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Query' ); }
+require_ok( 'Biblio::Document::Fetch::Query' );
 
-BEGIN { use_ok( 'Fetch::Paper::Query::Result' ); }
-require_ok( 'Fetch::Paper::Query::Result' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Query::Result' ); }
+require_ok( 'Biblio::Document::Fetch::Query::Result' );
 
-BEGIN { use_ok( 'Fetch::Paper::Query::ResultsPage' ); }
-require_ok( 'Fetch::Paper::Query::ResultsPage' );
+BEGIN { use_ok( 'Biblio::Document::Fetch::Query::ResultsPage' ); }
+require_ok( 'Biblio::Document::Fetch::Query::ResultsPage' );
 
-ok(defined(Fetch::Paper::Query->new( agent => LWP::UserAgent->new )), 'new query');
+ok(defined(Biblio::Document::Fetch::Query->new( agent => LWP::UserAgent->new )), 'new query');
 
 done_testing;

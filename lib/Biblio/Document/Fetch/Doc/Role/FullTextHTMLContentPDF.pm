@@ -1,12 +1,12 @@
-package Fetch::Paper::Doc::Role::FullTextHTMLContentPDF;
+package Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF;
 
 use strict;
 use warnings;
 use Moo::Role;
 
-with ('Fetch::Paper::Doc::Role::FullTextHTMLContent',
-	'Fetch::Paper::Doc::Role::HTMLContent',
-	'Fetch::Paper::Doc::Role::PDF');
+with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContent',
+	'Biblio::Document::Fetch::Doc::Role::HTMLContent',
+	'Biblio::Document::Fetch::Doc::Role::PDF');
 
 has _content_for_pdf => ( is => 'lazy' );
 
