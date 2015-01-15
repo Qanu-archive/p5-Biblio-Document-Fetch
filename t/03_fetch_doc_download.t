@@ -31,14 +31,6 @@ isa_ok($fetch->agent, LWP::UserAgent, "agent");
 my $proxy;
 ok defined( $proxy = Biblio::Document::Fetch::Proxy->new( fetch => $fetch )), "create proxy";
 
-
-# TODO remove this test...automatic login
-#my $proxy_login = Biblio::Document::Fetch::Proxy->new( fetch => $fetch );
-#my $login_response;
-#my $test_agent = $fetch->agent->clone;
-#$proxy_login->agent($test_agent);
-#is(($login_response = $proxy_login->login())->code, 302, "successful login");
-
 for my $test (@$test_data) {
 	my $test_uri = $test->{uri};
 	my $test_type = $test->{type};
