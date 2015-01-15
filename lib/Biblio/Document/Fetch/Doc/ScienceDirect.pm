@@ -48,6 +48,8 @@ sub _build_info {
 	my @keyword; push @keyword, $_->as_text for @kw_nodes;
 	s/;\s+$//g for @keyword;
 	my $doi = URI->new($doi_text, 'doi');
+
+	warn "no abstract found" unless $abstract;
 	return {
 		title => \@title,
 		author => \@author,
