@@ -37,6 +37,8 @@ sub _build_agent {
 	my ($self) = @_;
 	my $agent = $self->fetch->agent->clone;
 	$self->_logged_in(0);
+	$agent->ssl_opts( verify_hostname => 0 );
+	$agent->ssl_opts( SSL_verify_mode => 'SSL_VERIFY_NONE' );
 	$agent;
 }
 
