@@ -10,11 +10,12 @@ use Carp;
 use Try::Tiny;
 
 extends 'Biblio::Document::Fetch::Doc';
-with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
-	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 has base_uri => ( is => 'ro', default => sub { URI->new('http://ieeexplore.ieee.org/') } );
 has proxy_domain => ( is => 'ro', default => sub { 'ieeexplore.ieee.org' } );
+
+with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
+	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 sub _build_info {
 	my ($self) = @_;

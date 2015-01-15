@@ -5,7 +5,7 @@ use warnings;
 use Moo::Role;
 with ('Biblio::Document::Fetch::Doc::Role::FullText', 'Biblio::Document::Fetch::Doc::Role::Proxy');
 
-has proxy_domain => ( is => 'ro' );
+requires 'proxy_domain'; # has proxy_domain => ( is => 'ro' );
 
 sub _build_ft_agent {
 	my ($self) = @_;

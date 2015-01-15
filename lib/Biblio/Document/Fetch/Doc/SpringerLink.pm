@@ -8,13 +8,14 @@ use HTML::TreeBuilder::XPath;
 use Regexp::Common qw /whitespace/;
 
 extends 'Biblio::Document::Fetch::Doc';
-with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
-	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 has base_uri => ( is => 'ro', default => sub { URI->new('http://www.springerlink.com/') } );
 has proxy_domain => ( is => 'ro', default => sub { 'www.springerlink.com' } );
 has _abstract_content => ( is => 'lazy' );
 has _abstract_uri => ( is => 'lazy' );
+
+with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
+	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
 sub _build_info {
 	my ($self) = @_;

@@ -43,7 +43,7 @@ sub _build_agent {
 sub _around_login_for_agent {
 	my $orig = shift;
 	my $self = shift;
-        my $agent = $orig->($self, @_);
+	my $agent = $orig->($self, @_);
 	$self->login($agent);
 	$agent;
 }

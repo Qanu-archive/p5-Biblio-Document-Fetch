@@ -9,10 +9,12 @@ use List::Util qw/first/;
 use Try::Tiny;
 
 extends 'Biblio::Document::Fetch::Doc';
+
+has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
+
 with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
 	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
-has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
 
 sub _build_info {
 	my ($self) = @_;
