@@ -15,6 +15,20 @@ has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
 with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
 	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
 
+around uri => sub {
+	my $orig = shift;
+	my $self = shift;
+	my $uri = $orig->($self, @_);
+
+	# Need to add this so that non-progressive mode is enabled.
+	#
+	# > This page uses JavaScript to progressively load the article content as a
+	# > user scrolls.  Screen reader users, click the load entire article button
+	# > to bypass dynamically loaded article content.
+	$uri->query_form( np => 'y' );
+
+	$uri;
+};
 
 sub _build_info {
 	my ($self) = @_;
