@@ -16,7 +16,7 @@ use HTML::Form;
 
 use constant QUERY_URL => URI->new('http://scholar.google.com/scholar');
 use constant QUERY_PARAM => 'q';
-use constant NUMBER_PARAM => (num => 100);
+use constant NUMBER_PARAM => (num => 20);
 	# TODO, this could be configurable, but not needed? Maximising this minimises queries
 use constant COOKIE_CITE_RIS_ID => 2;
 use constant COOKIE_CITE_BIBTEX_ID => 4;

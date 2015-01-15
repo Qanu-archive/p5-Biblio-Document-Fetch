@@ -20,19 +20,19 @@ my $first_page = $fetch->query('Google::Scholar', 'test' );
 ok( defined $first_page, "Google::Scholar first page");
 #use DDP; p $first_page->response->decoded_content;
 #use DDP; p $_->info for @{$first_page->entries};
-is( scalar @{$first_page->entries}, 100, 'Google::Scholar first page entries length');
+is( scalar @{$first_page->entries}, 20, 'Google::Scholar first page entries length');
 
 is($first_page->previous_page, undef, "Google::Scholar non-existent page -1");
 
 my $next_page;
 ok defined($next_page = $first_page->next_page), 'Google::Scholar page 2';
 #use DDP; p $_->info for @{$next_page->entries};
-is( scalar @{$next_page->entries}, 100, 'Google::Scholar 2nd page entries length');
+is( scalar @{$next_page->entries}, 20, 'Google::Scholar 2nd page entries length');
 
 my $first_page_copy;
 ok defined($first_page_copy = $next_page->previous_page), "Google::Scholar request page 1 (copy) from page 2";
 ok( !defined $first_page_copy->previous_page, "Google::Scholar (copy) non-existent page -1");
-is( scalar @{$first_page_copy->entries}, 100, 'Google::Scholar first page (copy) entries length');
+is( scalar @{$first_page_copy->entries}, 20, 'Google::Scholar first page (copy) entries length');
 
 # clear out entry data as we are not comparing these
 $first_page_e = dclone($first_page->entries);
