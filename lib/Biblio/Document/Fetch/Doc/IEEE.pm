@@ -52,7 +52,7 @@ sub _build_info {
 		issn => $self->_meta_content($tree, "citation_issn"),
 		isbn => $self->_meta_content($tree, "citation_isbn"),
 		language => $self->_meta_content($tree, "citation_language"),
-		keywords => [ map {s/$RE{ws}{crop}//g; $_} split ';', $self->_meta_content($tree, "citation_keywords") ],
+		keywords => [ map {s/$RE{ws}{crop}//g; $_} split ';', $self->_meta_content($tree, "citation_keywords")->[0] ],
 		conference => $self->_meta_content($tree, "citation_conference"),
 		publisher => $self->_meta_content($tree, "citation_publisher"),
 		author => [ map { $_->attr('content') }
