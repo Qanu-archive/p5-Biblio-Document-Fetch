@@ -23,13 +23,18 @@ sub _build_info {
 	$tree->parse( $self->content );
 
 
+	# curl 'http://ieeexplore.ieee.org/xpl/downloadCitations' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Referer: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=860044' --data 'recordIds=860044&citations-format=citation-abstract&download-format=download-bibtex' --compressed
+	# articleDetails.ajax
+	# abstractAuthors.ajax
+	# abstractKeywords.ajax
+	# http://ieeexplore.ieee.org/xpl/abstractReferences.ajax?arnumber=860044
 	# <meta name="citation_author" content="Lin Jia Jun">
 	# <meta name="citation_author_institution" content="Res. Inst. of Autom., ECUST, Shanghai">
 	# <meta name="citation_author" content="Liu Rui Ming">
 	# <meta name="citation_author" content="Le Hui Feng">
 	# <meta name="citation_author" content="Yu Jin Shou">
 
-	my @abstract_nodes = $tree->findnodes('//div[contains(@class,"abstract")]');
+	my @abstract_nodes = $tree->findnodes('//div[contains(@class,"article")]');
 	my $abstract; $abstract .= $_->as_text for @abstract_nodes;
 	$abstract =~ s/^Abstract//g;
 	$abstract =~ s/$RE{ws}{crop}//g;
@@ -56,7 +61,12 @@ sub _build_info {
 }
 sub _meta_content {
 	my ($self, $tree, $name) = @_;
-	return [$tree->findnodes("//meta[\@name = '$name']")]->[0]->attr('content');
+	my @meta_nodes = $tree->findnodes("//meta[\@name = '$name']");
+	if(@meta_nodes) {
+		return $meta_nodes[0]->attr('content');
+	}
+	warn "could not find any meta info for $name";
+	undef;
 }
 sub _tree_pdf_node {
 	my ($self, $tree) = @_;
