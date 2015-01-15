@@ -5,6 +5,7 @@ use warnings;
 
 our $VERSION = '0.01';
 
+use Biblio::Document::Fetch::Extension;
 use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 use LWP::UserAgent;
