@@ -14,8 +14,9 @@ extends 'Biblio::Document::Fetch::Doc';
 has base_uri => ( is => 'ro', default => sub { URI->new('http://ieeexplore.ieee.org/') } );
 has proxy_domain => ( is => 'ro', default => sub { 'ieeexplore.ieee.org' } );
 
-with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
-	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
+with qw(Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF
+	Biblio::Document::Fetch::Doc::Role::ProxyDomain
+	Biblio::Document::Fetch::Doc::Role::HTMLMetaTag);
 
 sub _build_info {
 	my ($self) = @_;
@@ -58,15 +59,6 @@ sub _build_info {
 			$tree->findnodes('//meta[@name = "citation_author"]') ],
 		abstract => $abstract,
 	};
-}
-sub _meta_content {
-	my ($self, $tree, $name) = @_;
-	my @meta_nodes = $tree->findnodes("//meta[\@name = '$name']");
-	if(@meta_nodes) {
-		return $meta_nodes[0]->attr('content');
-	}
-	warn "could not find any meta info for $name";
-	undef;
 }
 sub _tree_pdf_node {
 	my ($self, $tree) = @_;

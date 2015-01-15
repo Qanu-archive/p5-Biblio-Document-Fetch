@@ -12,8 +12,8 @@ extends 'Biblio::Document::Fetch::Doc';
 
 has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
 
-with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
-	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
+with qw(Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF
+	Biblio::Document::Fetch::Doc::Role::ProxyDomain);
 
 around uri => sub {
 	my $orig = shift;

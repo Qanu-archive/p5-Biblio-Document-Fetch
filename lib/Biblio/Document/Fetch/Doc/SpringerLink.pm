@@ -14,34 +14,23 @@ has proxy_domain => ( is => 'ro', default => sub { 'www.springerlink.com' } );
 has _abstract_content => ( is => 'lazy' );
 has _abstract_uri => ( is => 'lazy' );
 
-with ('Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF',
-	'Biblio::Document::Fetch::Doc::Role::ProxyDomain');
+with qw(Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF
+	Biblio::Document::Fetch::Doc::Role::ProxyDomain
+	Biblio::Document::Fetch::Doc::Role::HTMLMetaTag);
 
 sub _build_info {
 	my ($self) = @_;
 	my $tree = HTML::TreeBuilder::XPath->new;
 	$tree->parse( $self->content );
 
-	my $div_text = $tree->findnodes('//div[contains(@class,"text")]')->[0];
-	my $abstract_tree = HTML::TreeBuilder::XPath->new_from_content( $self->_abstract_content );
-	my $div_abstractText = $abstract_tree->findnodes('//div[contains(@class,"abstractText")]')->[0];
+	my $div_abstractText = $tree->findnodes('//div[contains(@class,"abstract-content")]')->[0];
+	my $kw_node = $tree->findnodes('//ul[contains(@class,"abstract-keywords")')->[0];
 
-	my @title_nodes = $div_text->findnodes('h1');
-	my @author_nodes = $div_text->findnodes('p[contains(@class, "authors")]/a');
-	my @abstract_nodes = $div_abstractText->findnodes('//div[contains(@class,"Abstract")]');
-	my $kw_node = $div_abstractText->findnodes('//p[contains(@class,"Keyword")')->[0];
-	for($kw_node->content_list()) {
-		next unless ref $_;
-		$_->delete if $_->attr('_tag') eq 'span';
-	}
-
-	my @title; push @title, $_->as_text for @title_nodes;
-	s/$RE{ws}{crop}//g for @title;
-	my @author; push @author, $_->as_text for @author_nodes;
-	s/$RE{ws}{crop}//g for @author;
-	my $abstract; $abstract .= $_->as_text for @abstract_nodes;
+	my @title = @{ $self->_meta_content($tree, "citation_title") };
+	my @author = @{ $self->_meta_content($tree, "citation_author") };
+	my $abstract = $div_abstractText->as_text;
 	$abstract =~ s/$RE{ws}{crop}//g;
-	my @keyword; push @keyword, $_ for split /\s+-\s+/, $kw_node->as_text;
+	my @keyword = map { $_->as_text } $kw_node->findnodes('li');
 
 	# TODO
 	#  <div class="heading enumeration">
