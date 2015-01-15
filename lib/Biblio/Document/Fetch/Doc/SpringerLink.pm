@@ -58,27 +58,22 @@ sub _build__abstract_content {
 sub _build__abstract_uri {
 	my ($self) = @_;
 	my $abstract = $self->uri->clone;
-	$abstract->path_segments( $self->uri->path_segments, 'primary' ); 
+	$abstract->path_segments( $self->uri->path_segments, 'primary' );
 	$abstract;
 }
 
-sub _tree_pdf_node {
-	my ($self, $tree) = @_;
-	return $tree->findnodes(q#//a[contains(@class,"pdf-resource-sprite")]#)->[0];
-}
 sub _content_has_pdf {
 	my ($self, $content) = @_;
-	my $tree = HTML::TreeBuilder::XPath->new;
-	$tree->parse( $content );
-	my $node = $tree->findnodes(q#//div[contains(@class,"notRecognized")#)->[0];
-	not defined $node; 
+	# viewType="Full text download"
+	$content !~ /viewType="Denial"/;
 }
 sub get_pdf_link {
 	my ($self) = @_;
 	my $tree = HTML::TreeBuilder::XPath->new;
 	$tree->parse( $self->_content_for_pdf );
-	my $pdf_link = $self->_tree_pdf_node($tree);
-	my $link = URI->new_abs($pdf_link->attr('href'), $self->base_uri) if $pdf_link->attr('href') =~ q/\.pdf$/;
+	my $pdf_link = $self->_meta_content($tree, "citation_pdf_url")->[0];
+
+	my $link = URI->new($pdf_link);
 	return $link;
 }
 
