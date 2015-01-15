@@ -25,7 +25,7 @@ sub add_host {
 	push @$hosts, $host; $self->_hosts($hosts);
 	$self->agent->add_handler(
 		request_prepare => sub {
-			my($request, $ua, $h) = @_; 
+			my($request, $ua, $h) = @_;
 			my $new_uri = $request->uri->clone;
 			$new_uri->host($new_uri->host . EZPROXY_APPEND);
 			$request->uri($new_uri);
@@ -61,7 +61,7 @@ sub login {
 	my ($self, $agent) = @_;
 	$agent->cookie_jar({}) unless defined $agent->cookie_jar;
 	$agent->get(EZPROXY_LOGIN);
-	
+
 	my $response;
 	try {
 		$response = $agent->post(EZPROXY_LOGIN,

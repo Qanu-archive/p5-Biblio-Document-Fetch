@@ -18,7 +18,7 @@ TODO:
 * write documentation
 * support more sources
 * automatically dispatch to source plugins
-* fetch/generate clean BibTeX 
+* fetch/generate clean BibTeX
 
 WARNING: This code is only meant to be used for personal use. Do not use this
 for systematic downloading of papers as this will likely violate agreements
