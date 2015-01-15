@@ -38,16 +38,16 @@ sub _build_info {
 	my @title_nodes = $tree->findnodes('//h1[contains(@class,"svTitle")]');
 	my @author_nodes = $tree->findnodes('//a[contains(@class,"authorName")]');
 	my @abstract_nodes = $tree->findnodes('//div[contains(@class,"abstract")]');
-	my @doi_nodes = $tree->findnodes('//a[contains(@id,"ddDoi")]');
+	my $doi_text = ($self->content =~ /SDM\.doi\s*=\s*'(\S*)';/m)[0];
 	my @kw_nodes = $tree->findnodes('//ul[contains(@class,"keyword")]/li');
 
 	my @title; push @title, $_->as_text for @title_nodes;
 	my @author; push @author, $_->as_text for @author_nodes;
-	my $abstract; $abstract .= $_->as_text for @abstract_nodes;
+	my $abstract = ''; $abstract .= $_->as_text for @abstract_nodes;
 	$abstract =~ s/^Abstract//;
 	my @keyword; push @keyword, $_->as_text for @kw_nodes;
 	s/;\s+$//g for @keyword;
-	my $doi = URI->new($doi_nodes[0]->attr('href'));
+	my $doi = URI->new($doi_text, 'doi');
 	return {
 		title => \@title,
 		author => \@author,
