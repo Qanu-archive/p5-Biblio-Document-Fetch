@@ -21,16 +21,16 @@ my $doc;
 my @do  = qw/ ScienceDirect IEEE SpringerLink /;
 
 if(grep { /ScienceDirect/ } @do) {
-	ok defined($doc = $fetch->doc('ScienceDirect',
-		URI->new('http://www.sciencedirect.com/science/article/pii/S0925838803002378'))),
+	ok defined($doc = $fetch->doc( source => 'ScienceDirect',
+		uri => URI->new('http://www.sciencedirect.com/science/article/pii/S0925838803002378'))),
 		'Create ScienceDirect doc';
 	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::ScienceDirect', 'ScienceDirect type');
 	use DDP; p $doc->info;
 }
 
 if(grep { /IEEE/ } @do) {
-	ok defined($doc = $fetch->doc('IEEE',
-		URI->new('http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=860044'))),
+	ok defined($doc = $fetch->doc( source => 'IEEE',
+		uri => URI->new('http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=860044'))),
 		'Create IEEE doc';
 	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::IEEE', 'IEEE type');
 	use DDP; p $doc->info;
@@ -39,8 +39,8 @@ if(grep { /IEEE/ } @do) {
 
 
 if(grep { /SpringerLink/ } @do) {
-	ok defined($doc = $fetch->doc('SpringerLink',
-		URI->new('http://www.springerlink.com/content/p4p7668165p03723/'))),
+	ok defined($doc = $fetch->doc( source => 'SpringerLink',
+		uri => URI->new('http://www.springerlink.com/content/p4p7668165p03723/'))),
 		'Create SpringerLink doc';
 	isa_ok( $doc, 'Biblio::Document::Fetch::Doc::SpringerLink', 'SpringerLink type');
 	use DDP; p $doc->info;

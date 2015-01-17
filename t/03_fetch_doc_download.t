@@ -38,8 +38,8 @@ for my $test (@$test_data) {
 	subtest $test_type => sub {
 		plan tests => 5;
 		my $doc;
-		ok defined($doc = $fetch->doc($test_type,
-				URI->new($test_uri), proxy => Biblio::Document::Fetch::Proxy->new(fetch => $fetch))), "Create $test_type doc";
+		ok defined($doc = $fetch->doc( source => $test_type,
+				uri => URI->new($test_uri), proxy => Biblio::Document::Fetch::Proxy->new(fetch => $fetch))), "Create $test_type doc";
 		isa_ok( $doc, "Biblio::Document::Fetch::Doc::$test_type", "$test_type type");
 
 		#use DDP; p $doc->agent;

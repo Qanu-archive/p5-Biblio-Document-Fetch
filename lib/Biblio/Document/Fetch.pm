@@ -30,10 +30,12 @@ sub query_object {
 }
 
 sub doc {
-	my ($self, $source, $uri, @rest) = @_;
+	my ($self, %args) = @_;
+	my $source = delete $args{source};
+	my $uri = delete $args{uri};
 	my $source_module = __PACKAGE__."::Doc::".$source;
 	try { load "$source_module"; } catch { croak "Could not load module: $_"; };
-	return $source_module->new( agent => $self->agent->clone, uri => $uri, @rest );
+	return $source_module->new( agent => $self->agent->clone, uri => $uri, %args );
 }
 
 sub query {
