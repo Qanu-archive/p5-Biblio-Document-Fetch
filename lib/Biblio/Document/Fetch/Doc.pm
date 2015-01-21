@@ -5,7 +5,7 @@ use warnings;
 use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 
-has agent => ( is => 'rw', isa => InstanceOf['LWP::UserAgent'] );
+with qw(Biblio::Document::Fetch::Role::Agent);
 
 has uri => ( is => 'rw', isa => InstanceOf['URI'] );
 

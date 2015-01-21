@@ -13,7 +13,7 @@ use Module::Load;
 use Try::Tiny;
 use Carp;
 
-has agent => ( is => 'lazy', isa => InstanceOf['LWP::UserAgent'] );
+with qw(Biblio::Document::Fetch::Role::Agent);
 
 sub _build_agent {
 	my $ua = LWP::UserAgent->new;
