@@ -84,8 +84,11 @@ sub get_pdf_link {
 	my $tree = HTML::TreeBuilder::XPath->new;
 	$tree->parse( $self->_content_for_pdf );
 	my $pdf_link = $self->_tree_pdf_node($tree);
-	my $link = URI->new($pdf_link->attr('href')) if $pdf_link->attr('href') =~ q/\.pdf$/;
-	return $link;
+	if( $pdf_link->attr('href') =~ q/\.pdf$/ ) {
+		my $link = URI->new($pdf_link->attr('href'));
+		return $link;
+	}
+	die "Could not extract PDF link";
 }
 
 1;
