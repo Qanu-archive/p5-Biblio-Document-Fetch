@@ -15,6 +15,17 @@ has proxy_domain => ( is => 'ro', default => sub { 'www.sciencedirect.com' } );
 with qw(Biblio::Document::Fetch::Doc::Role::FullTextHTMLContentPDF
 	Biblio::Document::Fetch::Doc::Role::ProxyDomain);
 
+around _agent_for_pdf => sub {
+	my $orig = shift;
+	my $self = shift;
+
+	my $agent = $orig->($self, @_);
+	# ScienceDirect requires cookies
+	$agent->cookie_jar({}) unless defined $agent->cookie_jar;
+
+	$agent;
+};
+
 around uri => sub {
 	my $orig = shift;
 	my $self = shift;
