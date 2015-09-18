@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
+
 use Test::More;
 use Digest::MD5 qw(md5 md5_hex md5_base64);
 use lib 't/lib';
@@ -26,7 +29,7 @@ require_ok( 'Biblio::Document::Fetch::Proxy' );
 
 my $fetch;
 ok defined( $fetch = Biblio::Document::Fetch->new()), "create fetcher";
-isa_ok($fetch->agent, LWP::UserAgent, "agent");
+isa_ok($fetch->agent, 'LWP::UserAgent', "agent");
 
 my $proxy;
 ok defined( $proxy = Biblio::Document::Fetch::Proxy->new( fetch => $fetch )), "create proxy";
