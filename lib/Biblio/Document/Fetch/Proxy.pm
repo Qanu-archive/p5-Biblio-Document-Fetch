@@ -6,10 +6,11 @@ use Moo;
 use MooX::Types::MooseLike::Base qw(:all);
 
 use LWP::UserAgent;
+use HTML::Form;
 use Try::Tiny;
 use Carp;
 
-use constant EZPROXY_LOGIN => q,https://login.ezproxy.lib.uh.edu/login,;
+use constant EZPROXY_LOGIN => q,https://signin.lib.uh.edu/login,;
 use constant EZPROXY_APPEND => q,.ezproxy.lib.uh.edu,;
 
 has fetch => ( is => 'rw' );
@@ -60,17 +61,27 @@ around agent => sub {
 sub login {
 	my ($self, $agent) = @_;
 	$agent->cookie_jar({}) unless defined $agent->cookie_jar;
-	$agent->get(EZPROXY_LOGIN);
+	my $login_response = $agent->get(EZPROXY_LOGIN);
+	#use Carp::REPL 'repl'; repl();
 
 	my $response;
-	try {
-		$response = $agent->post(EZPROXY_LOGIN,
-			{user => $ENV{UH_COUGARNET_USER},
-			pass => $ENV{UH_COUGARNET_PASS}},);
-		croak "Invalid user/password\n" unless $response->code == 302;
-	} catch {
-		croak "Can not login: $_\n";
-	};
+	if( $login_response->content =~ /Log In Successful/ ) {
+		# already logged in
+		$response = $login_response;
+	} else {
+		# try logging in
+		try {
+			# TODO inject the credentials
+			my $form = HTML::Form->parse($login_response);
+			die "No login form found" unless $form;
+			$form->value(username => $ENV{UH_COUGARNET_USER});
+			$form->value(password => $ENV{UH_COUGARNET_PASS});
+			$response = $agent->request( $form->click );
+			croak "Invalid user/password\n" unless $response->code == 200;
+		} catch {
+			croak "Can not login: $_\n";
+		};
+	}
 	$self->_logged_in(1);
 	$response;
 }
