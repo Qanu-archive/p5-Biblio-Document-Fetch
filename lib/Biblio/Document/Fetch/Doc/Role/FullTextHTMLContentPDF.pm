@@ -32,8 +32,11 @@ sub get_pdf {
 	my ($self, @opt) = @_;
 	my $agent = $self->_agent_for_pdf;
 	my $link = $self->get_pdf_link;
-	my $response = $agent->get($link, @opt) if defined $link;
-	$response;
+	if( defined $link ) {
+		my $response = $agent->get($link, @opt);
+		return $response;
+	}
+	die "Could not extract PDF link";
 }
 
 1;
