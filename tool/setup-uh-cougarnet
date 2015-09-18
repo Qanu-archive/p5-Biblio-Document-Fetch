@@ -1,0 +1,6 @@
+echo "UH CougarNet credentials"
+read -e -p "username: " UH_COUGARNET_USER
+read -e -s -p "password: " UH_COUGARNET_PASS
+echo
+
+export UH_COUGARNET_PASS UH_COUGARNET_USER
