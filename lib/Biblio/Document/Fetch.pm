@@ -26,7 +26,7 @@ sub query_object {
 	my ($self, $source ) = @_;
 	my $source_module = __PACKAGE__."::Query::".$source;
 	try { load "$source_module"; } catch { croak "Could not load module: $_"; };
-	return $source_module->new( agent => $self->agent );
+	return $source_module->new( agent => $self->agent->clone );
 }
 
 sub doc {
