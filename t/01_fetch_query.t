@@ -18,8 +18,9 @@ isa_ok($fetch->agent, LWP::UserAgent, "agent");
 
 my $first_page = $fetch->query('Google::Scholar', 'test' );
 ok( defined $first_page, "Google::Scholar first page");
-#use DDP; p $first_page->response->decoded_content;
-#use DDP; p $_->info for @{$first_page->entries};
+use DDP; p $first_page->response->request->headers;
+use DDP; p $first_page->response->decoded_content;
+use DDP; p $_->info for @{$first_page->entries};
 is( scalar @{$first_page->entries}, 20, 'Google::Scholar first page entries length');
 
 is($first_page->previous_page, undef, "Google::Scholar non-existent page -1");

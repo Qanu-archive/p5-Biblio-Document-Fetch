@@ -26,8 +26,15 @@ has header => ( is => 'lazy' );
 sub query {
 	my ($self, $query ) = @_;
 	my $uri = QUERY_URL->clone;
+	#$uri->query_param(NUMBER_PARAM);
+
+	$uri->query_param( hl => 'en' );
 	$uri->query_param(QUERY_PARAM, $query); # want the constant (not =>)
-	$uri->query_param(NUMBER_PARAM);
+	$uri->query_param( NUMBER_PARAM );
+	$uri->query_param( btnG => '' );
+	$uri->query_param( as_sdt => '1,44' );
+	$uri->query_param( as_sdtp => '' );
+
 	my $response = $self->get($uri);
 	my $results;
 	$results = Biblio::Document::Fetch::Query::Google::Scholar::ResultsPage->new(query => $self,
